@@ -21,7 +21,7 @@ const TestApi = () => {
         ) : (
             backendData.oferta.map((oferta, i) => (
                 <div>
-                    <p key={i}>{oferta}<a href={i}></a></p><Button className=" ml-8" variant="contained">Zobacz</Button>
+                    <p key={i}>{oferta}</p><Button className=" ml-8" variant="contained">Zobacz</Button>
                 </div>
             ))
         )}
