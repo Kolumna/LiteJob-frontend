@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import React from 'react'
 
 const TestApi = () => {
@@ -17,7 +17,7 @@ const TestApi = () => {
   return (
     <div className="p-8">
         {(typeof backendData.oferta === 'undefined') ? (
-            <p>Ładowanie...</p>
+            <CircularProgress />
         ) : (
             backendData.oferta.map((oferta, i) => (
                 <div>
