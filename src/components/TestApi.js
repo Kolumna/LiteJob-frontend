@@ -14,18 +14,22 @@ const TestApi = () => {
             }
         )
     }, [])
-  return (
-    <div className="p-8">
-        {(typeof backendData.oferta === 'undefined') ? (
-            <CircularProgress />
-        ) : (
-            backendData.oferta.map((oferta, i) => (
-                <div>
-                    <p key={i}>{oferta}</p><Button className=" ml-8" variant="contained">Zobacz</Button>
-                </div>
-            ))
-        )}
-    </div>
+
+    const [title, newTitle] = useState('Lite')
+    return (
+        <div className="p-8">
+
+            <div>{title}</div>
+            {(typeof backendData.oferta === 'undefined') ? (
+                <CircularProgress />
+            ) : (
+                backendData.oferta.map((oferta, i) => (
+                    <div key={i}>
+                        <p>{oferta}</p><Button className=" ml-8" variant="contained" onClick={() => newTitle('Job')}>Zobacz</Button>
+                    </div>
+                ))
+            )}
+        </div>
   )
 }
 
