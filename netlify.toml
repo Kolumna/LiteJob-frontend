@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/api"
-  to = "https://litejob-backend.herokuapp.com/api"
+  from = "/user"
+  to = "https://litejob-backend.herokuapp.com/user"
   status = 200
 
 [[redirects]]
