@@ -16,7 +16,7 @@ const SignIn = () => {
     setData(newData);
   };
 
-  const post = () => {
+  const handleSubmit = () => {
     setIsPending(true);
     fetch("/users")
       .then((res) => res.json())
@@ -32,7 +32,7 @@ const SignIn = () => {
 
   return (
     <section className=" w-full h-full flex justify-center items-center mt-64">
-      <sectio className=" w-full h-full flex justify-center items-end flex-col">
+      <div className=" w-full h-full flex justify-center items-end flex-col">
         <div className=" mr-24 h-full flex flex-col justify-center items-center">
           <svg
             width="314"
@@ -71,7 +71,7 @@ const SignIn = () => {
             />
             <div className=" mt-12">
               {!isPending && (
-                <Button onClick={post} margin="normal" variant="contained">
+                <Button onClick={handleSubmit} margin="normal" variant="contained">
                   zaloguj
                 </Button>
               )}
@@ -81,7 +81,7 @@ const SignIn = () => {
             </div>
           </form>
         </div>
-      </sectio>
+      </div>
       <div className=" w-full h-full flex justify-start items-center">
         <div className=" ml-24 h-full flex flex-col justify-center items-center">
           <p className=" text-6xl font-bold">

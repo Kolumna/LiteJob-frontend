@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -7,32 +7,41 @@ const SignUp = () => {
     second_name: "",
     email: "",
     login: "",
-    password: ""
-  })
+    password: "",
+  });
 
   const [isPending, setIsPending] = useState(false);
+  const [isStworzoned, setIsStworzoned] = useState(false);
 
-  const handle = e => {
-    const newData = {...data}
-    newData[e.target.id] = e.target.value
-    setData(newData)
-  }
+  const handle = (e) => {
+    const newData = { ...data };
+    newData[e.target.id] = e.target.value;
+    setData(newData);
+  };
 
-  const post = () => {
+  const handleSubmit = () => {
     setIsPending(true);
 
-    fetch('/users', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(data)
+    fetch("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     }).then(() => {
-      console.log('Dodano nowego uzytkownika', data)
+      console.log("Dodano nowego uzytkownika", data);
+      setIsStworzoned(true);
       setIsPending(false);
-    })
-  }
+    });
+  };
 
   return (
     <section className=" w-full h-full flex justify-center items-center flex-col mt-64">
+      <div className=" absolute top-0 h-[100px] flex justify-center items-center w-full -z-10">
+        { isStworzoned &&
+          <Alert className=" absolute top-[30px]" severity="success">
+            Użytkownik {data.login} został dodany!
+          </Alert>
+        }
+      </div>
       <svg
         width="314"
         height="74"
@@ -49,7 +58,10 @@ const SignUp = () => {
           fill="black"
         />
       </svg>
-      <form onSubmit={handle} className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24">
+      <form
+        onSubmit={handle}
+        className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
+      >
         <TextField
           id="first_name"
           onChange={(e) => handle(e)}
@@ -88,6 +100,7 @@ const SignUp = () => {
         />
         <TextField
           id="password"
+          type="password"
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
@@ -96,16 +109,16 @@ const SignUp = () => {
           value={data.password}
         />
         <div className=" mt-12">
-          { !isPending && 
-            <Button onClick={post} margin="normal" variant="contained">
-            rejestracja
+          {!isPending && (
+            <Button onClick={handleSubmit} margin="normal" variant="contained">
+              rejestracja
             </Button>
-          }
-          { isPending && 
+          )}
+          {isPending && (
             <Button margin="normal" variant="contained">
-            rejestracja...
+              rejestracja...
             </Button>
-          }
+          )}
         </div>
       </form>
     </section>
