@@ -13,11 +13,13 @@ const TestApi = () => {
       });
   }, []);
 
+  console.log(backendData)
+
   //const [title, newTitle] = useState("Lite");
   return (
     <div className="p-8">
       <div></div>
-      { typeof backendData === "undefined" ? (
+      { backendData.length === 1 ? (
         <CircularProgress />
       ) : (
         backendData.map((element, i) => (
