@@ -70,6 +70,7 @@ const SignUp = () => {
           label="imię"
           variant="outlined"
           value={data.first_name}
+          required
         />
         <TextField
           id="second_name"
@@ -79,6 +80,7 @@ const SignUp = () => {
           label="nazwisko"
           variant="outlined"
           value={data.second_name}
+          required
         />
         <TextField
           id="email"
@@ -88,6 +90,7 @@ const SignUp = () => {
           label="e-mail"
           variant="outlined"
           value={data.email}
+          required
         />
         <TextField
           id="login"
@@ -97,6 +100,7 @@ const SignUp = () => {
           label="login"
           variant="outlined"
           value={data.login}
+          required
         />
         <TextField
           id="password"
@@ -107,6 +111,7 @@ const SignUp = () => {
           label="hasło"
           variant="outlined"
           value={data.password}
+          required
         />
         <div className=" mt-12">
           {!isPending && (

@@ -23,7 +23,7 @@ const TestApi = () => {
         <CircularProgress />
       ) : (
         backendData.map((element, i) => (
-          <p className=" text-3xl" key={i}>Cześć {element.first_name}!</p>
+          <p className=" text-6xl font-bold" key={i}>Cześć <span className=" text-[#4ED1C9]">{element.first_name}</span>!</p>
         ))
       )}
     </div>
