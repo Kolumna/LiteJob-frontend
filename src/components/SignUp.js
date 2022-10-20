@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Alert } from "@mui/material";
+import { TextField, Button, Alert, CircularProgress } from "@mui/material";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -115,9 +115,7 @@ const SignUp = () => {
             </Button>
           )}
           {isPending && (
-            <Button margin="normal" variant="contained">
-              rejestracja...
-            </Button>
+            <CircularProgress />
           )}
         </div>
       </form>
