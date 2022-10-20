@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/user"
+  from = "/users"
   to = "https://litejob-backend.herokuapp.com/users"
   status = 200
 
