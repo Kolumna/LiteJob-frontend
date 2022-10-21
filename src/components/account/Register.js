@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Alert, CircularProgress } from "@mui/material";
 
-const SignUp = () => {
+const Register = () => {
   const [data, setData] = useState({
     first_name: "",
     second_name: "",
@@ -128,4 +128,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

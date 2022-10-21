@@ -1,39 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { TextField, Button, CircularProgress } from "@mui/material";
+import { Redirect } from "react-router-dom";
+import { BrowserRouter as Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
-  const [data, setData] = useState({
-    login: "",
-    password: "",
-  });
+const Login = () => {
+  const navigate = useNavigate();
+  const userRef = useRef();
+  const errRef = useRef();
 
-  const [isPending, setIsPending] = useState(false);
-  const [backendData, setBackendData] = useState([{}]);
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [fail, setFail] = useState(false);
 
-  const handle = (e) => {
-    const newData = { ...data };
-    newData[e.target.id] = e.target.value;
-    setData(newData);
-  };
+  useEffect(() => {
+    userRef.current.focus();
+  }, [user, pwd]);
 
-  const handleSubmit = () => {
-    setIsPending(true);
-    fetch("/users")
-      .then((res) => res.json())
-      .then((data) => {
-        setBackendData(data);
-      }).then(() => {
-        setIsPending(false)
-        backendData.map((element) => (
-          console.log(element.login)
-        ))
-      });
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user, pwd);
+    setUser("");
+    setPwd("");
+    if (user === "admin" && pwd === "litejob123") {
+      navigate("/panel");
+      setFail(false);
+    } else {
+      setFail(true);
+    }
   };
 
   return (
-    <section className=" w-full h-full flex justify-center items-center mt-64">
-      <div className=" w-full h-full flex justify-center items-end flex-col">
-        <div className=" mr-24 h-full flex flex-col justify-center items-center">
+    <section className=" w-full h-full flex flex-wrap justify-center items-center mt-64">
+      <div className=" h-full flex justify-center items-end flex-col p-24">
+        <div className=" h-full flex flex-col justify-center items-center">
           <svg
             width="314"
             height="74"
@@ -50,47 +56,55 @@ const SignIn = () => {
               fill="black"
             />
           </svg>
-          <form className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24">
+          {success && <h1>zalogowano</h1>}
+          {fail && <h1>Błąd</h1>}
+          <form
+            action="/panel"
+            onSubmit={handleSubmit}
+            className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
+          >
+            <p
+              ref={errRef}
+              className={errMsg ? "errMsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <TextField
               id="login"
-              onChange={(e) => handle(e)}
               margin="dense"
               fullWidth
               label="login"
               variant="outlined"
-              value={data.login}
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              ref={userRef}
+              required
             />
             <TextField
               id="password"
-              onChange={(e) => handle(e)}
+              type="password"
               margin="dense"
               fullWidth
               label="hasło"
               variant="outlined"
-              value={data.password}
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
             />
-            <div className=" mt-12">
-              {!isPending && (
-                <Button onClick={handleSubmit} margin="normal" variant="contained">
-                  zaloguj
-                </Button>
-              )}
-              {isPending && (
-                <CircularProgress />
-              )}
-            </div>
+            <button className=" simple-button">Zaloguj</button>
           </form>
         </div>
       </div>
-      <div className=" w-full h-full flex justify-start items-center">
-        <div className=" ml-24 h-full flex flex-col justify-center items-center">
+      <div className=" h-full flex justify-start items-center ">
+        <div className=" h-full flex flex-col justify-center items-center p-24">
           <p className=" text-6xl font-bold">
             Nie masz <span className=" text-[#4ED1C9]">konta</span>?
           </p>
           <div className=" mt-12">
-            <Button href="/register" margin="normal" variant="contained">
-              zarejestruj się
-            </Button>
+            <a href="/register">
+              <button className=" simple-button">Zarejestruj się</button>
+            </a>
           </div>
         </div>
       </div>
@@ -98,4 +112,32 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+// const [data, setData] = useState({
+//   login: "",
+//   password: "",
+// });
+
+// const [isPending, setIsPending] = useState(false);
+// const [backendData, setBackendData] = useState([{}]);
+
+// const handle = (e) => {
+//   const newData = { ...data };
+//   newData[e.target.id] = e.target.value;
+//   setData(newData);
+// };
+
+// const handleSubmit = () => {
+//   setIsPending(true);
+//   fetch("/users")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       setBackendData(data);
+//     }).then(() => {
+//       setIsPending(false)
+//       backendData.map((element) => (
+//         console.log(element.login)
+//       ))
+//     });
+// };
+
+export default Login;
