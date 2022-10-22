@@ -11,7 +11,6 @@ import { useState } from "react";
 
 const App = () => {
   const [ofertaData, setOfertaData] = useState([{}]);
-  const OfertaDane = [];
 
   useEffect(() => {
     fetch("/oferty")
