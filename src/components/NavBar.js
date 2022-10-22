@@ -24,9 +24,12 @@ const NavBar = () => {
             </svg>
           </div>
         </a>
-        <div className=" ml-8 font-bold">KATEGORIE</div>
+        <div className=" ml-8 font-bold hidden md:block">KATEGORIE</div>
       </div>
-      <div className=" flex">
+      <div className=" w-12 h-2 after:h-2 bg-black md:hidden">
+
+      </div>
+      <div className=" hidden md:flex">
         <div className=" flex items-center mr-8">
           <svg
             width="48"

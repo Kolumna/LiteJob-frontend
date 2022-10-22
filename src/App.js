@@ -21,8 +21,6 @@ const App = () => {
       });
   }, []);
 
-  console.log(OfertaDane)
-
   return (
     <>
       <NavBar />

@@ -11,6 +11,15 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [fail, setFail] = useState(false);
+  const [userData, setUserData] = useState([{}]);
+
+  useEffect(() => {
+    fetch("/users")
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+      });
+  }, []);
 
   useEffect(() => {
     userRef.current.focus();
@@ -25,13 +34,14 @@ const Login = () => {
     console.log(user, pwd);
     setUser("");
     setPwd("");
-    //NA RAZIE TYLKO DLA DEV
-    if (user === "admin" && pwd === "litejob123") {
-      navigate("/panel");
-      setFail(false);
-    } else {
-      setFail(true);
-    }
+
+    userData.map((element, i) =>
+      user === element.email ? (
+        navigate(`/${element._id}`)
+      ) : (
+        setFail('true')
+      )
+    );
   };
 
   return (
@@ -69,9 +79,10 @@ const Login = () => {
             </p>
             <TextField
               id="login"
+              type="email"
               margin="dense"
               fullWidth
-              label="login"
+              label="email"
               variant="outlined"
               onChange={(e) => setUser(e.target.value)}
               value={user}

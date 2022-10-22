@@ -1,11 +1,11 @@
 import React from 'react'
-import TestApi from './TestApi'
+import Start from './Start'
 
 const Content = () => {
   return (
     <div className="flex justify-bewtween">
-        <TestApi />
-        <div className=" w-full">
+        <Start />
+        <div className=" w-full hidden lg:block">
           <iframe title='mapa'
             width="100%"
             height="100%"

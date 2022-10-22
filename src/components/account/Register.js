@@ -6,7 +6,7 @@ const Register = () => {
     first_name: "",
     second_name: "",
     email: "",
-    login: "",
+    nazwa_firmy: "",
     password: "",
   });
 
@@ -38,7 +38,7 @@ const Register = () => {
       <div className=" absolute top-0 h-[100px] flex justify-center items-center w-full -z-10">
         { isStworzoned &&
           <Alert className=" absolute top-[30px]" severity="success">
-            Użytkownik {data.login} został dodany!
+            Użytkownik o adresie {data.email} został dodany!
           </Alert>
         }
       </div>
@@ -67,7 +67,7 @@ const Register = () => {
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
-          label="imię"
+          label="Imię"
           variant="outlined"
           value={data.first_name}
           required
@@ -77,7 +77,7 @@ const Register = () => {
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
-          label="nazwisko"
+          label="Nazwisko"
           variant="outlined"
           value={data.second_name}
           required
@@ -87,19 +87,19 @@ const Register = () => {
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
-          label="e-mail"
+          label="E-mail"
           variant="outlined"
           value={data.email}
           required
         />
         <TextField
-          id="login"
+          id="nazwa_firmy"
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
-          label="login"
+          label="Nazwa firmy"
           variant="outlined"
-          value={data.login}
+          value={data.nazwa_firmy}
           required
         />
         <TextField
@@ -108,7 +108,7 @@ const Register = () => {
           onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
-          label="hasło"
+          label="Hasło"
           variant="outlined"
           value={data.password}
           required

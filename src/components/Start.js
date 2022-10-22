@@ -38,10 +38,10 @@ const TestApi = () => {
             key={i}
           >
             <div>
-              <p className=" text-4xl font-bold">
+              <p className=" text-2xl lg:text-4xl font-bold">
                 <span className=" text-[#4ED1C9]">{element.title}</span>
               </p>
-              <p className=" text-md mt-4 font-bold">
+              <p className=" text-md lg:text-xl mt-4 font-bold">
                 <span className=" text-[#000000]">
                   {userData.map(
                     (user, i) =>
@@ -52,13 +52,13 @@ const TestApi = () => {
                 </span>
               </p>
               <a href={`/${element._id}`}>
-                <button className="simple-button mt-12 p-2 pl-4 pr-4">
-                  Więcej
+                <button className="simple-button mt-12 p-2 pl-5 pr-5">
+                  <span className=" text-md lg:text-lg">Więcej</span>
                 </button>
               </a>
             </div>
             <div className=" flex flex-col justify-between items-end">
-              <p className=" text-5xl font-bold">
+              <p className=" text-3xl lg:text-5xl font-bold">
                 {element.price}
                 <span className=" text-[#4ED1C9]">/h</span>
               </p>
@@ -87,7 +87,7 @@ const TestApi = () => {
                     />
                   </g>
                 </svg>
-                <span className=" text-[#000000] ml-2">{element.location}</span>
+                <span className=" text-[#000000] ml-2 lg:text-3xl">{element.location}</span>
               </p>
             </div>
           </div>
