@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "@mui/material";
 
 const NavBar = () => {
   return (
-    <nav className=" flex justify-between items-center h-[100px] p-8">
+    <nav className=" flex justify-between items-center h-[100px] p-8 shadow-xl">
+      <div className=" flex items-center">
       <a href="/">
-        <div className=" cursor-pointer">
+        <div className=" flex items-center cursor-pointer">
           <svg
             width="132"
             height="32"
@@ -24,10 +24,16 @@ const NavBar = () => {
           </svg>
         </div>
       </a>
+      <div className=" ml-8 font-bold">
+            KATEGORIE
+      </div>
+      </div>
       <div>
-        <Button href="/login" variant="contained">
+        <a href="/login">
+        <button className=" simple-button p-2 pl-8 pr-8 text-md" variant="contained">
           Zaloguj
-        </Button>
+        </button>
+        </a>
       </div>
     </nav>
   );

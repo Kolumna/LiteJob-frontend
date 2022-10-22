@@ -3,7 +3,7 @@
 
 @layer components {
   .simple-button {
-    @apply mt-24 bg-black text-white font-bold text-xl rounded-full p-4 pl-8 pr-8 border-4 border-black hover:bg-white hover:text-black transition-all duration-200
+    @apply bg-black text-white font-bold text-xl rounded-full p-4 pl-8 pr-8 border-4 border-black hover:bg-white hover:text-black transition-all duration-200
   }
 }
 

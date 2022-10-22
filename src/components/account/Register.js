@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Alert, CircularProgress } from "@mui/material";
+import { TextField, Alert, CircularProgress } from "@mui/material";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -115,9 +115,9 @@ const Register = () => {
         />
         <div className=" mt-12">
           {!isPending && (
-            <Button onClick={handleSubmit} margin="normal" variant="contained">
+            <button className=" simple-button" onClick={handleSubmit}>
               rejestracja
-            </Button>
+            </button>
           )}
           {isPending && (
             <CircularProgress />

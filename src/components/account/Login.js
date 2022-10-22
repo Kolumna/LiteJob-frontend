@@ -1,7 +1,5 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { TextField, Button, CircularProgress } from "@mui/material";
-import { Redirect } from "react-router-dom";
-import { BrowserRouter as Route } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -12,7 +10,6 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
   const [fail, setFail] = useState(false);
 
   useEffect(() => {
@@ -56,7 +53,6 @@ const Login = () => {
               fill="black"
             />
           </svg>
-          {success && <h1>zalogowano</h1>}
           {fail && <h1>Błąd</h1>}
           <form
             action="/panel"
@@ -92,7 +88,7 @@ const Login = () => {
               value={pwd}
               required
             />
-            <button className=" simple-button">Zaloguj</button>
+            <button className=" simple-button mt-24">Zaloguj</button>
           </form>
         </div>
       </div>
@@ -103,7 +99,7 @@ const Login = () => {
           </p>
           <div className=" mt-12">
             <a href="/register">
-              <button className=" simple-button">Zarejestruj się</button>
+              <button className=" simple-button mt-8">Zarejestruj się</button>
             </a>
           </div>
         </div>
