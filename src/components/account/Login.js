@@ -25,6 +25,7 @@ const Login = () => {
     console.log(user, pwd);
     setUser("");
     setPwd("");
+    //NA RAZIE TYLKO DLA DEV
     if (user === "admin" && pwd === "litejob123") {
       navigate("/panel");
       setFail(false);
