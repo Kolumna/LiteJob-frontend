@@ -28,9 +28,9 @@ const PasswordForgot = () => {
   };
 
   return (
-    <section className=" w-full h-full flex flex-wrap justify-center items-center mt-64">
-      <div className=" h-full flex justify-center items-end flex-col p-24">
-        <div className=" h-full flex flex-col justify-center items-center">
+    <section className=" w-full h-full flex flex-wrap justify-center items-center" style={{ height: "calc(100vh - 100px)" }}>
+      <div className=" h-full flex justify-center items-end flex-col p-24 ">
+        <div className=" h-full flex flex-col justify-center items-center gap-24">
           <svg
             width="314"
             height="74"
@@ -51,7 +51,7 @@ const PasswordForgot = () => {
           {message && <h2>{message}</h2>}
           <form
             onSubmit={handleSubmit}
-            className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
+            className=" flex flex-col justify-evenly h-auto w-[400px] items-center"
           >
             <input
             className=" simple-input"

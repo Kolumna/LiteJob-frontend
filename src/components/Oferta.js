@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Oferta = (props) => {
   const [userData, setUserData] = useState([{}]);
@@ -82,7 +83,9 @@ const Oferta = (props) => {
             ></iframe>
           </div>
           <div className=" flex justify-center items-center w-full p-12">
-            <button className=" simple-button">Aplikuj</button>
+            <Link to={`${props.dane._id}`}>
+              <button className=" simple-button">Aplikuj</button>
+            </Link>
           </div>
         </div>
       </div>

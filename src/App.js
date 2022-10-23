@@ -15,6 +15,7 @@ import UpdateProfile from "./components/account/UpdateProfile";
 import Dodawanie from "./components/panel/Dodawanie";
 import TwojeOgloszenia from "./components/panel/TwojeOgloszenia";
 import EdycjaOgloszenia from "./components/panel/EdycjaOgloszenia"
+import Aplikuj from "./components/Aplikuj";
 
 const App = () => {
   const [ofertaData, setOfertaData] = useState([{}]);
@@ -50,6 +51,14 @@ const App = () => {
               exact
               path={`/${element._id}`}
               element={<Oferta dane={element} />}
+            />
+          ))}
+          {ofertaData.map((element, i) => (
+            <Route
+              key={i}
+              exact
+              path={`/${element._id}/${element._id}`}
+              element={<Aplikuj dane={element} />}
             />
           ))}
         </Routes>
