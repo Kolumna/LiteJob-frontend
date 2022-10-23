@@ -1,26 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import { CircularProgress } from "@mui/material";
+import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { CircularProgress, useEventCallback } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const PasswordForgot = () => {
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setMessage('')
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      history("/panel");
+      await resetPassword(emailRef.current.value);
+      setMessage('Sprawdź swoją skrzynkę mailową')
     } catch {
-      setError("Błąd przy logowaniu");
+      setError("Nie ma takiego adresu");
     }
     setLoading(false);
   };
@@ -46,85 +48,38 @@ const Login = () => {
             />
           </svg>
           {error && <h2>{error}</h2>}
+          {message && <h2>{message}</h2>}
           <form
             onSubmit={handleSubmit}
             className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
           >
             <input
               id="email"
-              placeholder="email"
-              margin="dense"
-              fullWidth
-              label="E-mail"
-              variant="outlined"
-              ref={emailRef}
-              required
-            />
-            <input
-              id="password"
-              placeholder="hasło"
-              type="password"
+              placeholder="Podaj email"
+              type="email"
               margin="dense"
               fullWidth
               label="Hasło"
               variant="outlined"
-              ref={passwordRef}
+              ref={emailRef}
               required
             />
             <div className=" mt-12">
-              {!loading && <button className=" simple-button">Zaloguj</button>}
+              {!loading && (
+                <button className=" simple-button">Odzyskaj hasło</button>
+              )}
               {loading && <CircularProgress />}
             </div>
             <div>
-              <Link to='/odzyskanie-hasla'>
-                <button>Zapomniałem hasła</button>
+              <Link to="/login">
+                <button>Zaloguj się</button>
               </Link>
             </div>
           </form>
-        </div>
-      </div>
-      <div className=" h-full flex justify-start items-center ">
-        <div className=" h-full flex flex-col justify-center items-center p-24">
-          <p className=" text-6xl font-bold">
-            Nie masz <span className=" text-[#4ED1C9]">konta</span>?
-          </p>
-          <div className=" mt-12">
-            <Link to="/register">
-              <button className=" simple-button mt-8">Zarejestruj się</button>
-            </Link>
-          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// const [data, setData] = useState({
-//   login: "",
-//   password: "",
-// });
-
-// const [isPending, setIsPending] = useState(false);
-// const [backendData, setBackendData] = useState([{}]);
-
-// const handle = (e) => {
-//   const newData = { ...data };
-//   newData[e.target.id] = e.target.value;
-//   setData(newData);
-// };
-
-// const handleSubmit = () => {
-//   setIsPending(true);
-//   fetch("/users")
-//     .then((res) => res.json())
-//     .then((data) => {
-//       setBackendData(data);
-//     }).then(() => {
-//       setIsPending(false)
-//       backendData.map((element) => (
-//         console.log(element.login)
-//       ))
-//     });
-// };
-
-export default Login;
+export default PasswordForgot;

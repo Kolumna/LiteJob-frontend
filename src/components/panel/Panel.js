@@ -1,19 +1,46 @@
 import React from "react";
+import { useState } from "react";
 import DocumentTitle from "react-document-title";
+import { useAuth } from "../../context/AuthContext";
+import {Link, useNavigate} from 'react-router-dom'
 
 const Panel = () => {
+  const [error, setError] = useState('')
+  const { currentUser, logout } = useAuth();
+  const history = useNavigate()
+
+  const handleLogout = async () => {
+    setError('')
+
+    try {
+      await logout()
+      history('/login')
+    } catch {
+      setError('Błąd przy wylogowywaniu')
+    }
+  }
+
   return (
-    <DocumentTitle title='Panel'>
+    <DocumentTitle title="Panel">
       <section
         className=" flex flex-col p-8"
         style={{ height: "calc(100vh - 100px)" }}
       >
+        <button onClick={handleLogout}>Wyloguj</button>
         <h1 className=" font-bold">
-          Cześć <span className=" text-[#4ED1C9]">Michał</span>!
+          Cześć <span className=" text-[#4ED1C9]">{currentUser.email}</span>!
         </h1>
+        <div className=" mt-4">
+          <Link to="/edycja-profilu">
+            <button>Edytuj profil</button>
+          </Link>
+        </div>
         <div className=" flex justify-center items-center h-full w-full mt-12">
           <div className=" flex justify-center flex-wrap gap-8">
-            <div onClick={console.log('tworzymy')} className=" border-transparent hover:border-[#4ED1C9] border-8 p-8 transition-all duration-300 cursor-pointer">
+            <div
+              onClick={console.log("tworzymy")}
+              className=" border-transparent hover:border-[#4ED1C9] border-8 p-8 transition-all duration-300 cursor-pointer"
+            >
               <svg
                 width="300"
                 height="417"

@@ -1,47 +1,39 @@
 import React, { useState } from "react";
-import { TextField, Alert, CircularProgress } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
+import { useRef } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [data, setData] = useState({
-    first_name: "",
-    second_name: "",
-    email: "",
-    nazwa_firmy: "",
-    password: "",
-  });
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const { register } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useNavigate();
 
-  const [isPending, setIsPending] = useState(false);
-  const [isStworzoned, setIsStworzoned] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handle = (e) => {
-    const newData = { ...data };
-    newData[e.target.id] = e.target.value;
-    setData(newData);
-  };
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Oba hasła nie są identyczne");
+    }
 
-  const handleSubmit = () => {
-    setIsPending(true);
-
-    fetch("/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }).then(() => {
-      console.log("Dodano nowego uzytkownika", data);
-      setIsStworzoned(true);
-      setIsPending(false);
-    });
+    try {
+      setError("");
+      setLoading(true);
+      await register(emailRef.current.value, passwordRef.current.value);
+      history.navigate('/panel')
+    } catch {
+      setError("Błąd przy tworzeniu użytkownika");
+    }
+    setLoading(false);
   };
 
   return (
     <section className=" w-full h-full flex justify-center items-center flex-col mt-64">
-      <div className=" absolute top-0 h-[100px] flex justify-center items-center w-full -z-10">
-        { isStworzoned &&
-          <Alert className=" absolute top-[30px]" severity="success">
-            Użytkownik o adresie {data.email} został dodany!
-          </Alert>
-        }
-      </div>
+      <div className=" absolute top-0 h-[100px] flex justify-center items-center w-full -z-10"></div>
       <svg
         width="314"
         height="74"
@@ -58,70 +50,46 @@ const Register = () => {
           fill="black"
         />
       </svg>
+      {error && <h2>{error}</h2>}
       <form
-        onSubmit={handle}
+        onSubmit={handleSubmit}
         className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
       >
-        <TextField
-          id="first_name"
-          onChange={(e) => handle(e)}
-          margin="dense"
-          fullWidth
-          label="Imię"
-          variant="outlined"
-          value={data.first_name}
-          required
-        />
-        <TextField
-          id="second_name"
-          onChange={(e) => handle(e)}
-          margin="dense"
-          fullWidth
-          label="Nazwisko"
-          variant="outlined"
-          value={data.second_name}
-          required
-        />
-        <TextField
+        <input
           id="email"
-          onChange={(e) => handle(e)}
+          placeholder="email"
           margin="dense"
           fullWidth
           label="E-mail"
           variant="outlined"
-          value={data.email}
+          ref={emailRef}
           required
         />
-        <TextField
-          id="nazwa_firmy"
-          onChange={(e) => handle(e)}
-          margin="dense"
-          fullWidth
-          label="Nazwa firmy"
-          variant="outlined"
-          value={data.nazwa_firmy}
-          required
-        />
-        <TextField
+        <input
           id="password"
+          placeholder="hasło"
           type="password"
-          onChange={(e) => handle(e)}
           margin="dense"
           fullWidth
           label="Hasło"
           variant="outlined"
-          value={data.password}
+          ref={passwordRef}
+          required
+        />
+        <input
+          id="password"
+          placeholder="powtórz hasło"
+          type="password"
+          margin="dense"
+          fullWidth
+          label="Potwierdź hasło"
+          variant="outlined"
+          ref={passwordConfirmRef}
           required
         />
         <div className=" mt-12">
-          {!isPending && (
-            <button className=" simple-button" onClick={handleSubmit}>
-              rejestracja
-            </button>
-          )}
-          {isPending && (
-            <CircularProgress />
-          )}
+          {!loading && <button className=" simple-button">rejestracja</button>}
+          {loading && <CircularProgress />}
         </div>
       </form>
     </section>

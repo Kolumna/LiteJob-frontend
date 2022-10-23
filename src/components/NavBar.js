@@ -1,6 +1,20 @@
 import React from "react";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import {Link, useNavigate} from 'react-router-dom'
 
 const NavBar = () => {
+  const { currentUser, logout } = useAuth();
+  const { error, setError } = useState("");
+  const { isPanel, setIsPanel} = useState(false);
+
+  const history = useNavigate()
+
+  const handleLogout = () => {
+    history('/panel')
+    setIsPanel(true);
+  };
+
   return (
     <nav className=" flex justify-between items-center h-[100px] p-8 shadow-xl">
       <div className=" flex items-center">
@@ -26,9 +40,7 @@ const NavBar = () => {
         </a>
         <div className=" ml-8 font-bold hidden md:block">KATEGORIE</div>
       </div>
-      <div className=" w-12 h-2 after:h-2 bg-black md:hidden">
-
-      </div>
+      <div className=" w-12 h-2 after:h-2 bg-black md:hidden"></div>
       <div className=" hidden md:flex">
         <div className=" flex items-center mr-8">
           <svg
@@ -57,14 +69,36 @@ const NavBar = () => {
           </svg>
           <span className=" text-[#000000] ml-2 text-2xl font-bold">Toruń</span>
         </div>
-        <a href="/login">
+        {currentUser && !isPanel && (
+          <button
+            onClick={handleLogout}
+            className=" simple-button p-2 pl-8 pr-8 text-md"
+            variant="contained"
+          >
+            Panel
+          </button>
+        )}
+        {
+          isPanel && (
+            <button
+            onClick={handleLogout}
+            className=" simple-button p-2 pl-8 pr-8 text-md"
+            variant="contained"
+          >
+            Wyloguj
+          </button>
+          )
+        }
+        {!currentUser && 
+          <Link to='/login'>
           <button
             className=" simple-button p-2 pl-8 pr-8 text-md"
             variant="contained"
           >
             Zaloguj
           </button>
-        </a>
+          </Link>
+        }
       </div>
     </nav>
   );

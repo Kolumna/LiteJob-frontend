@@ -8,6 +8,10 @@ import Content from "./components/Content";
 import { useEffect } from "react";
 import Oferta from "./components/Oferta";
 import { useState } from "react";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+import PasswordForgot from "./components/account/PasswordForgot";
+import UpdateProfile from "./components/account/UpdateProfile";
 
 const App = () => {
   const [ofertaData, setOfertaData] = useState([{}]);
@@ -21,24 +25,34 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <NavBar />
+    <AuthProvider>
       <Router>
+        <NavBar />
         <Routes>
           <Route exact path="/" element={<Content />} />
           <Route exact path="/login" element={<SignIn />} />
-          <Route exact path="/register" element={<SignUp />} />
-          <Route exact path="/panel" element={<Panel />} />
-          {ofertaData.map((element) => (
-            <Route
+          {ofertaData.map((element, i) => (
+            <Route key={i}
               exact
               path={`/${element._id}`}
               element={<Oferta dane={element} />}
             />
           ))}
         </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/panel" element={<PrivateRoute />}>
+              <Route exact path="/panel" element={<Panel />} />
+            </Route>
+            <Route exact path="/edycja-profilu" element={<PrivateRoute />}>
+              <Route exact path="/edycja-profilu" element={<UpdateProfile />} />
+            </Route>
+            <Route exact path="/register" element={<SignUp />} />
+            <Route exact path="/odzyskanie-hasla" element={<PasswordForgot />} />
+          </Routes>
+        </AuthProvider>
       </Router>
-    </>
+    </AuthProvider>
   );
 };
 

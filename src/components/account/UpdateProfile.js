@@ -3,25 +3,43 @@ import { useAuth } from "../../context/AuthContext";
 import { CircularProgress, useEventCallback } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const UpdateProfile = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const passwordConfirmRef = useRef();
+  const { currentUser, updateEmail, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      history("/panel");
-    } catch {
-      setError("Błąd przy logowaniu");
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Oba hasła nie są identyczne");
     }
+
+    const promises = [];
+    setLoading(true);
+    setError("");
+    if (emailRef.current.value !== currentUser.email) {
+      promises.push(updateEmail(emailRef.current.value));
+    }
+
+    if (passwordRef.current.value) {
+      promises.push(updatePassword(passwordRef.current.value));
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        history("/panel");
+      })
+      .catch(() => {
+        setError("Błąd przy aktualizacji profilu");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     setLoading(false);
   };
 
@@ -52,47 +70,40 @@ const Login = () => {
           >
             <input
               id="email"
-              placeholder="email"
+              placeholder="Nowy email"
               margin="dense"
               fullWidth
               label="E-mail"
               variant="outlined"
               ref={emailRef}
-              required
             />
             <input
               id="password"
-              placeholder="hasło"
+              placeholder="Nowe hasło"
               type="password"
               margin="dense"
               fullWidth
               label="Hasło"
               variant="outlined"
               ref={passwordRef}
-              required
+            />
+            <input
+              id="password"
+              placeholder="Powtórz nowe hasło"
+              type="password"
+              margin="dense"
+              fullWidth
+              label="Potwierdź hasło"
+              variant="outlined"
+              ref={passwordConfirmRef}
             />
             <div className=" mt-12">
-              {!loading && <button className=" simple-button">Zaloguj</button>}
+              {!loading && (
+                <button className=" simple-button">Aktualizuj</button>
+              )}
               {loading && <CircularProgress />}
             </div>
-            <div>
-              <Link to='/odzyskanie-hasla'>
-                <button>Zapomniałem hasła</button>
-              </Link>
-            </div>
           </form>
-        </div>
-      </div>
-      <div className=" h-full flex justify-start items-center ">
-        <div className=" h-full flex flex-col justify-center items-center p-24">
-          <p className=" text-6xl font-bold">
-            Nie masz <span className=" text-[#4ED1C9]">konta</span>?
-          </p>
-          <div className=" mt-12">
-            <Link to="/register">
-              <button className=" simple-button mt-8">Zarejestruj się</button>
-            </Link>
-          </div>
         </div>
       </div>
     </section>
@@ -127,4 +138,4 @@ const Login = () => {
 //     });
 // };
 
-export default Login;
+export default UpdateProfile;
