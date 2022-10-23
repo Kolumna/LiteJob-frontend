@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import {Link} from 'react-router-dom'
 
-const TestApi = () => {
+const TwojeOgloszenia = () => {
+  const { currentUser } = useAuth();
+
   const [ofertaData, setOfertaData] = useState([{}]);
   const [userData, setUserData] = useState([{}]);
 
@@ -21,18 +24,28 @@ const TestApi = () => {
       });
   }, []);
 
-  //const [title, newTitle] = useState("Lite");
+  let actual_user = ''
+
+  userData.map((element, i) => (
+    element.user_id === currentUser.uid &&
+    (actual_user = element._id)
+  ))
+
+  const usuwanie = (id) => {
+    fetch(`/oferty/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      window.location.reload(false);
+    });
+  }
+
   return (
-    <div
-      className="p-4 md:p-8 w-full overflow-y-auto"
+    <section
+      className="p-8 w-full overflow-y-auto"
       style={{ height: "calc(100vh - 100px)" }}
     >
       {ofertaData.map((element, i) =>
-        element.title === undefined ? (
-          <div key={i} className=" flex justify-center w-full mt-8">
-            <CircularProgress className=" absolute" />
-          </div>
-        ) : (
+        element.owner_id === actual_user && element !== 0 && (
           <div
             className=" flex justify-between border-4 border-black rounded-md p-8 mt-8 first:mt-0"
             key={i}
@@ -51,11 +64,19 @@ const TestApi = () => {
                   )}
                 </span>
               </p>
-              <a href={`/${element._id}`}>
+              <Link to={`/${element._id}`}>
                 <button className="simple-button mt-12 p-2 pl-5 pr-5">
                   <span className=" text-md lg:text-lg">Więcej</span>
                 </button>
-              </a>
+              </Link>
+              <Link value={console.log('dziala')} to='/edycja-ogloszenia'>
+                <button className="simple-button mt-12 p-2 pl-5 pr-5 ml-4 bg-[#5fd14e] border-[#5fd14e] hover:text-[#5fd14e]">
+                  <span className=" text-md lg:text-lg">Edytuj</span>
+                </button>
+              </Link>
+                <button onClick={() => usuwanie(element._id)} className="simple-button mt-12 p-2 pl-5 pr-5 ml-4 bg-[#d14e4e] border-[#d14e4e] hover:text-[#d14e4e]">
+                  <span className=" text-md lg:text-lg">Usuń</span>
+                </button>
             </div>
             <div className=" flex flex-col justify-between items-end">
               <p className=" text-3xl lg:text-5xl font-bold">
@@ -93,8 +114,11 @@ const TestApi = () => {
           </div>
         )
       )}
-    </div>
+      {ofertaData.length === 0 &&
+      <h1>Ups.. Nie masz jeszcze żadnych ogłoszeń</h1>
+      }
+    </section>
   );
 };
 
-export default TestApi;
+export default TwojeOgloszenia;

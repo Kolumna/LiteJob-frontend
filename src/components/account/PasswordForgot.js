@@ -54,13 +54,10 @@ const PasswordForgot = () => {
             className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
           >
             <input
+            className=" simple-input"
               id="email"
               placeholder="Podaj email"
               type="email"
-              margin="dense"
-              fullWidth
-              label="Hasło"
-              variant="outlined"
               ref={emailRef}
               required
             />
@@ -72,7 +69,7 @@ const PasswordForgot = () => {
             </div>
             <div>
               <Link to="/login">
-                <button>Zaloguj się</button>
+                <button className=" mt-8 text-xl font-bold hover:text-[#4ED1C9] transition-all duration-200">Zaloguj się</button>
               </Link>
             </div>
           </form>

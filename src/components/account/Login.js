@@ -26,8 +26,11 @@ const Login = () => {
   };
 
   return (
-    <section className=" w-full h-full flex flex-wrap justify-center items-center mt-64">
-      <div className=" h-full flex justify-center items-end flex-col p-24">
+    <section
+      className=" w-full h-full flex flex-wrap justify-center items-center gap-24"
+      style={{ height: "calc(100vh - 100px)" }}
+    >
+      <div className=" h-full flex justify-center items-end flex-col p-8">
         <div className=" h-full flex flex-col justify-center items-center">
           <svg
             width="314"
@@ -51,23 +54,17 @@ const Login = () => {
             className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
           >
             <input
+              className=" simple-input"
               id="email"
               placeholder="email"
-              margin="dense"
-              fullWidth
-              label="E-mail"
-              variant="outlined"
               ref={emailRef}
               required
             />
             <input
+              className=" simple-input"
               id="password"
               placeholder="hasło"
               type="password"
-              margin="dense"
-              fullWidth
-              label="Hasło"
-              variant="outlined"
               ref={passwordRef}
               required
             />
@@ -75,8 +72,8 @@ const Login = () => {
               {!loading && <button className=" simple-button">Zaloguj</button>}
               {loading && <CircularProgress />}
             </div>
-            <div>
-              <Link to='/odzyskanie-hasla'>
+            <div className=" mt-8 text-xl font-bold hover:text-[#4ED1C9] transition-all duration-200">
+              <Link to="/odzyskanie-hasla">
                 <button>Zapomniałem hasła</button>
               </Link>
             </div>
@@ -84,7 +81,7 @@ const Login = () => {
         </div>
       </div>
       <div className=" h-full flex justify-start items-center ">
-        <div className=" h-full flex flex-col justify-center items-center p-24">
+        <div className=" h-full flex flex-col justify-center items-center p-8">
           <p className=" text-6xl font-bold">
             Nie masz <span className=" text-[#4ED1C9]">konta</span>?
           </p>

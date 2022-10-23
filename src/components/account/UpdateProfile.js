@@ -69,32 +69,23 @@ const UpdateProfile = () => {
             className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
           >
             <input
+              className=" simple-input"
               id="email"
               placeholder="Nowy email"
-              margin="dense"
-              fullWidth
-              label="E-mail"
-              variant="outlined"
               ref={emailRef}
             />
             <input
+              className=" simple-input"
               id="password"
               placeholder="Nowe hasło"
               type="password"
-              margin="dense"
-              fullWidth
-              label="Hasło"
-              variant="outlined"
               ref={passwordRef}
             />
             <input
+              className=" simple-input"
               id="password"
               placeholder="Powtórz nowe hasło"
               type="password"
-              margin="dense"
-              fullWidth
-              label="Potwierdź hasło"
-              variant="outlined"
               ref={passwordConfirmRef}
             />
             <div className=" mt-12">

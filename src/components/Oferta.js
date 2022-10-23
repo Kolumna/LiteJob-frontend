@@ -18,7 +18,7 @@ const Oferta = (props) => {
       className=" flex flex-col h-full w-full"
       style={{ height: "calc(100vh - 100px)" }}
     >
-      <div className=" w-full flex justify-between p-12 h-full">
+      <div className=" w-full flex flex-wrap md:flex-nowrap gap-8 justify-between p-4 md:p-12 h-full">
         <div className=" w-full flex flex-col">
           <div className="flex justify-start items-center text-2xl font-bold">
             <svg
@@ -58,7 +58,9 @@ const Oferta = (props) => {
               umowa-zlecenie
             </span>
           </span>
-          <p className=" mt-8 text-3xl pr-12">{props.dane.content}</p>
+          <p className=" mt-8 text-xl md:text-3xl pr-12">
+            {props.dane.content}
+          </p>
         </div>
         <div className=" flex flex-col justify-start items-end w-full">
           <span className="text-3xl">
@@ -79,10 +81,10 @@ const Oferta = (props) => {
               src="https://api.maptiler.com/maps/493bcfed-b3bd-40dc-8481-2a8bf0de4d2f/?key=zinS1wlCxvs7Sqeojrxg#11.0/53.02098/18.77182"
             ></iframe>
           </div>
+          <div className=" flex justify-center items-center w-full p-12">
+            <button className=" simple-button">Aplikuj</button>
+          </div>
         </div>
-      </div>
-      <div className=" flex justify-center items-center w-full p-12">
-        <button className=" simple-button">Aplikuj</button>
       </div>
     </section>
   );

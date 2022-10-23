@@ -15,7 +15,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className=" flex justify-between items-center h-[100px] p-8 shadow-xl">
+    <nav className=" flex justify-between items-center h-[100px] p-4 md:p-8 shadow-xl">
       <div className=" flex items-center">
         <a href="/">
           <div className=" flex items-center cursor-pointer">
@@ -37,11 +37,9 @@ const NavBar = () => {
             </svg>
           </div>
         </a>
-        <div className=" ml-8 font-bold hidden md:block">KATEGORIE</div>
       </div>
-      <div className=" w-12 h-2 after:h-2 bg-black md:hidden"></div>
-      <div className=" hidden md:flex">
-        <div className=" flex items-center mr-8">
+      <div className=" flex">
+        <div className=" hidden md:flex items-center mr-8">
           <svg
             width="48"
             height="48"

@@ -6,6 +6,18 @@
     @apply bg-black text-white font-bold text-xl rounded-full p-4 pl-8 pr-8 border-4 border-black hover:bg-white hover:text-black transition-all duration-200
   }
 
+  .simple-input {
+    @apply w-[80%] p-4 text-xl mt-4 first:mt-0 focus:bg-[#4ed1c842] bg-slate-100 md:w-full
+  }
+
+  .success {
+    @apply text-2xl bg-green-200 p-4
+  }
+
+  .fail {
+    @apply text-2xl bg-red-200 p-4
+  }
+
   h1 {
     @apply text-5xl
   }

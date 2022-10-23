@@ -1,17 +1,33 @@
 import React, { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { useRef } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+//import { useAuth } from "../../context/AuthContext";
+//import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { register } = useAuth();
+  const first_nameRef = useRef();
+  const second_nameRef = useRef();
+  const companyRef = useRef();
+
+  //const { register, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
+  //const history = useNavigate();
+
+  const [data, setData] = useState({
+    first_name: "",
+    second_name: "",
+    user_id: "",
+  });
+
+  const handle = (e) => {
+    const newData = { ...data };
+    newData[e.target.id] = e.target.value;
+    setData(newData);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,19 +36,33 @@ const Register = () => {
       return setError("Oba hasła nie są identyczne");
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      await register(emailRef.current.value, passwordRef.current.value);
-      history('/panel')
-    } catch {
-      setError("Błąd przy tworzeniu użytkownika");
-    }
+    //do zrobienia
+    setError("Przepraszam, chwilowo coś się popsuło :(.");
+
+    // try {
+    //   setError("");
+    //   setLoading(true);
+    //   await register(emailRef.current.value, passwordRef.current.value);
+    //   data.user_id = currentUser.uid;
+    //   fetch("/users", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(data),
+    //   }).then(() => {
+    //     console.log("Dodano nowego uzytkownika", data);
+    //   });
+    //   history("/panel");
+    // } catch {
+    //   setError("Błąd przy tworzeniu użytkownika");
+    // }
+
     setLoading(false);
   };
-
   return (
-    <section className=" w-full h-full flex justify-center items-center flex-col mt-64">
+    <section
+      className=" w-full h-full flex justify-center items-center flex-col"
+      style={{ height: "calc(100vh - 100px)" }}
+    >
       <div className=" absolute top-0 h-[100px] flex justify-center items-center w-full -z-10"></div>
       <svg
         width="314"
@@ -50,42 +80,60 @@ const Register = () => {
           fill="black"
         />
       </svg>
-      {error && <h2>{error}</h2>}
+      {error && <p className=" fail mt-12">{error}</p>}
       <form
         onSubmit={handleSubmit}
-        className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
+        className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-12"
       >
         <input
           id="email"
+          className=" simple-input"
           placeholder="email"
-          margin="dense"
-          fullWidth
-          label="E-mail"
-          variant="outlined"
           ref={emailRef}
           required
         />
         <input
+          className=" simple-input"
           id="password"
           placeholder="hasło"
           type="password"
-          margin="dense"
-          fullWidth
-          label="Hasło"
-          variant="outlined"
           ref={passwordRef}
           required
         />
         <input
+          className=" simple-input"
           id="password"
           placeholder="powtórz hasło"
           type="password"
-          margin="dense"
-          fullWidth
-          label="Potwierdź hasło"
-          variant="outlined"
           ref={passwordConfirmRef}
           required
+        />
+        <input
+          className=" simple-input"
+          id="first_name"
+          placeholder="imię"
+          type="text"
+          ref={first_nameRef}
+          required
+          onChange={(e) => handle(e)}
+        />
+        <input
+          className=" simple-input"
+          id="second_name"
+          placeholder="nazwisko"
+          type="text"
+          ref={second_nameRef}
+          required
+          onChange={(e) => handle(e)}
+        />
+        <input
+          className=" simple-input"
+          id="company"
+          placeholder="nazwa firmy"
+          type="text"
+          ref={companyRef}
+          required
+          onChange={(e) => handle(e)}
         />
         <div className=" mt-12">
           {!loading && <button className=" simple-button">rejestracja</button>}
