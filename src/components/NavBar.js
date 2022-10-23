@@ -4,8 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
 
 const NavBar = () => {
-  const { currentUser, logout } = useAuth();
-  const { error, setError } = useState("");
+  const { currentUser } = useAuth();
   const { isPanel, setIsPanel} = useState(false);
 
   const history = useNavigate()

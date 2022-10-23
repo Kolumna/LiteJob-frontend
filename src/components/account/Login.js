@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { CircularProgress, useEventCallback } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
