@@ -24,7 +24,7 @@ const Register = () => {
       setError("");
       setLoading(true);
       await register(emailRef.current.value, passwordRef.current.value);
-      history.navigate('/panel')
+      history('/panel')
     } catch {
       setError("Błąd przy tworzeniu użytkownika");
     }
