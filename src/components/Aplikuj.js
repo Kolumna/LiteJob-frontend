@@ -12,24 +12,27 @@ const Aplikuj = (props) => {
         className=" flex justify-center items-center flex-col w-full md:w-[500px] gap-8"
       >
         <h1 className="mb-4">{props.dane.title}</h1>
-        <input className="simple-input" name="imie" type="text" placeholder="imię"></input>
+        <input className="simple-input" name="imie" type="text" placeholder="imię" required></input>
         <input
         name="nazwisko"
           className="simple-input"
           type="text"
           placeholder="nazwisko"
+          required
         ></input>
         <input
         name="email"
           className="simple-input"
           type="email"
           placeholder="email"
+          required
         ></input>
         <textarea
         name="tresc"
           className="simple-input resize-none"
           type="text"
           placeholder="treść"
+          required
         ></textarea>
         <button className="simple-button">Wyślij</button>
       </form>
