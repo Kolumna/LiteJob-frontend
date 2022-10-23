@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
 
 const Panel = () => {
-  const [setError] = useState('')
+  const [error, setError] = useState('')
   const { currentUser, logout } = useAuth();
   const history = useNavigate()
 
@@ -26,6 +26,7 @@ const Panel = () => {
         className=" flex flex-col p-8"
         style={{ height: "calc(100vh - 100px)" }}
       >
+        {error && <span>Wystąpił błąd</span>}
         <button onClick={handleLogout}>Wyloguj</button>
         <h1 className=" font-bold">
           Cześć <span className=" text-[#4ED1C9]">{currentUser.email}</span>!
