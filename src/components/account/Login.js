@@ -48,7 +48,7 @@ const Login = () => {
               fill="black"
             />
           </svg>
-          {error && <h2>{error}</h2>}
+          {error && <p className=" fail mt-12">{error}</p>}
           <form
             onSubmit={handleSubmit}
             className=" flex flex-col justify-evenly h-auto w-[400px] items-center mt-24"
