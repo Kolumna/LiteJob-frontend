@@ -58,7 +58,7 @@ const Oferta = (props) => {
               umowa-zlecenie
             </span>
           </span>
-          <p className=" mt-8 text-3xl">{props.dane.content}</p>
+          <p className=" mt-8 text-3xl pr-12">{props.dane.content}</p>
         </div>
         <div className=" flex flex-col justify-start items-end w-full">
           <span className="text-3xl">
