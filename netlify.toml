@@ -1,11 +1,11 @@
 [[redirects]]
   from = "/users"
-  to = "https://litejob-backend.herokuapp.com/users"
+  to = "https://litejob-backend.onrender.com/users"
   status = 200
 
 [[redirects]]
   from = "/oferty"
-  to = "https://litejob-backend.herokuapp.com/oferty"
+  to = "https://litejob-backend.onrender.com/oferty"
   status = 200
 
 [[redirects]]
