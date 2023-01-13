@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const { currentUser } = useAuth();
-  const { isPanel, setIsPanel} = useState(false);
+  const { isPanel, setIsPanel } = useState(false);
 
-  const history = useNavigate()
+  const history = useNavigate();
 
   const handleLogout = () => {
-    history('/panel')
+    history("/panel");
     setIsPanel(true);
   };
 
@@ -75,27 +75,25 @@ const NavBar = () => {
             Panel
           </button>
         )}
-        {
-          isPanel && (
-            <button
+        {isPanel && (
+          <button
             onClick={handleLogout}
             className=" simple-button p-2 pl-8 pr-8 text-md"
             variant="contained"
           >
             Wyloguj
           </button>
-          )
-        }
-        {!currentUser && 
-          <Link to='/login'>
-          <button
-            className=" simple-button p-2 pl-8 pr-8 text-md"
-            variant="contained"
-          >
-            Zaloguj
-          </button>
+        )}
+        {!currentUser && (
+          <Link to="/login">
+            <button
+              className=" simple-button p-2 pl-8 pr-8 text-md"
+              variant="contained"
+            >
+              Zaloguj
+            </button>
           </Link>
-        }
+        )}
       </div>
     </nav>
   );
