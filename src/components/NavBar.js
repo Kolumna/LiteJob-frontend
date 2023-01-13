@@ -17,8 +17,8 @@ const NavBar = () => {
   return (
     <nav className=" flex justify-between items-center h-[100px] p-4 md:p-8 shadow-xl">
       <div className=" flex items-center">
-        <a href="/">
-          <div className=" flex items-center cursor-pointer">
+        <Link to="/">
+          <div className=" flex items-center">
             <svg
               width="132"
               height="32"
@@ -36,7 +36,7 @@ const NavBar = () => {
               />
             </svg>
           </div>
-        </a>
+        </Link>
       </div>
       <div className=" flex">
         <div className=" hidden md:flex items-center mr-8">

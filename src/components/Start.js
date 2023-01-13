@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TestApi = () => {
   const [ofertaData, setOfertaData] = useState([{}]);
@@ -30,7 +31,7 @@ const TestApi = () => {
       {ofertaData.map((element, i) =>
         element.title === undefined ? (
           <div key={i} className=" flex justify-center w-full mt-8">
-            <CircularProgress className=" absolute" />
+            <CircularProgress sx={{color: '#4ED1C9'}} className=" absolute" />
           </div>
         ) : (
           <div
@@ -51,11 +52,11 @@ const TestApi = () => {
                   )}
                 </span>
               </p>
-              <a href={`/${element._id}`}>
+              <Link to={`/${element._id}`}>
                 <button className="simple-button mt-12 p-2 pl-5 pr-5">
                   <span className=" text-md lg:text-lg">Więcej</span>
                 </button>
-              </a>
+              </Link>
             </div>
             <div className=" flex flex-col justify-between items-end">
               <p className=" text-3xl lg:text-5xl font-bold">
