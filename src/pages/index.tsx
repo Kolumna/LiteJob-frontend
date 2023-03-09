@@ -9,11 +9,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="clas flex justify-center items-center min-h-screen">
+      <section className="clas flex flex-col gap-12 justify-center items-center min-h-screen">
         <section className="text-8xl font-bold">
-          <span className="text-teal-400">Lite</span>Job new edition
+          <span><span className="text-teal-400">Lite</span>Job new edition</span>
         </section>
-      </main>
+        <code className="font-bold text-4xl bg-slate-700 text-slate-100 px-4 py-2 rounded-lg">Comming soon</code>
+      </section>
     </>
   );
 }
