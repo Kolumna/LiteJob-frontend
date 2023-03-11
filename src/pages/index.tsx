@@ -1,6 +1,15 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [year, setYear] = useState('')
+
+  useEffect(() => {
+    fetch("/api/hello").then((res: any) => res.json()).then((data: any) => setYear(data.date))
+  }, [])
+
+  console.log(year)
+
   return (
     <>
       <Head>
@@ -9,12 +18,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="clas flex flex-col gap-12 justify-center items-center min-h-screen">
+      <section className="flex flex-col gap-12 justify-center items-center min-h-screen">
         <section className="text-8xl font-bold">
           <span><span className="text-teal-400">Lite</span>Job new edition</span>
         </section>
         <code className="font-bold text-4xl bg-slate-700 text-slate-100 px-4 py-2 rounded-lg">Comming soon</code>
       </section>
+      <footer className="flex justify-center items-center bg-teal-400">
+        <span className="text-black font-bold p-8 text-2xl">&#169;{year} JaniecParadaise</span>
+      </footer>
     </>
   );
 }
