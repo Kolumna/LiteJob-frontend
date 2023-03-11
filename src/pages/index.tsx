@@ -2,7 +2,14 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [year, setYear] = useState({})
+  interface IData {
+    name?: string,
+    date?: number,
+    os?: string,
+    arch?: string
+  }
+
+  const [year, setYear] = useState<IData>({})
 
   useEffect(() => {
     fetch("/api/hello").then((res: any) => res.json()).then((data: Object) => setYear(data))
