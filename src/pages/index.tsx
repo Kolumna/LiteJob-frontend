@@ -2,10 +2,10 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [year, setYear] = useState('')
+  const [year, setYear] = useState({})
 
   useEffect(() => {
-    fetch("/api/hello").then((res: any) => res.json()).then((data: any) => setYear(data.date))
+    fetch("/api/hello").then((res: any) => res.json()).then((data: Object) => setYear(data))
   }, [])
 
   console.log(year)
@@ -25,7 +25,7 @@ export default function Home() {
         <code className="font-bold text-4xl bg-slate-700 text-slate-100 px-4 py-2 rounded-lg">Comming soon</code>
       </section>
       <footer className="flex justify-center items-center bg-teal-400">
-        <span className="text-black font-bold p-8 text-2xl">&#169;{year} JaniecParadaise</span>
+        <span className="text-black font-bold p-8 text-2xl">&#169;{year.date} JaniecParadaise</span>
       </footer>
     </>
   );
