@@ -3,19 +3,21 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   interface IData {
-    name?: string,
-    date?: number,
-    os?: string,
-    arch?: string
+    name?: string;
+    date?: number;
+    os?: string;
+    arch?: string;
   }
 
-  const [year, setYear] = useState<IData>({})
+  const [year, setYear] = useState<IData>({});
 
   useEffect(() => {
-    fetch("/api/hello").then((res: any) => res.json()).then((data: Object) => setYear(data))
-  }, [])
+    fetch("/api/hello")
+      .then((res: any) => res.json())
+      .then((data: Object) => setYear(data));
+  }, []);
 
-  console.log(year)
+  console.log(year);
 
   return (
     <>
@@ -27,12 +29,18 @@ export default function Home() {
       </Head>
       <section className="flex flex-col gap-12 justify-center items-center min-h-screen">
         <section className="text-8xl font-bold">
-          <span><span className="text-teal-400">Lite</span>Job new edition</span>
+          <span>
+            <span className="text-teal-400">Lite</span>Job new edition
+          </span>
         </section>
-        <code className="font-bold text-4xl bg-slate-700 text-slate-100 px-4 py-2 rounded-lg">Comming soon</code>
+        <code className="font-bold text-4xl bg-slate-700 text-slate-100 px-4 py-2 rounded-lg">
+          Comming soon
+        </code>
       </section>
       <footer className="flex justify-center items-center bg-teal-400">
-        <span className="text-black font-bold p-8 text-2xl">&#169;{year.date} JaniecParadaise</span>
+        <span className="text-black font-bold p-8 text-2xl">
+          &#169;{year.date && year.date} JaniecParadaise
+        </span>
       </footer>
     </>
   );
